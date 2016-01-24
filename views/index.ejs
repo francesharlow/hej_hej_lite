@@ -6,16 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="/jquery/dist/jquery.js"></script>
   <script src="/angular/angular.js"></script>
-  <script src="/js/app.js"></script>
-  <script src="/js/users_controller.js"></script>
-  <script src="/js/flashcards_controller.js"></script>
-  <link rel="stylesheet" href="/css/main.css">
+  <script src="/javascript/app.js"></script>
+  <script src="/javascript/users_controller.js"></script>
+  <script src="/javascript/flashcards_controller.js"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
   <div class="wrapper">
     <div class="splash">
       <h1>Hej!*</h1>
-      <h2>Hej Hej Lite is a fun, simple full-stack Javascript app for studying Swedish vocabulary and grammar.
+      <h2>Vill du spela?</h2>
+      <p>*Hej Hej Lite is a fun, simple full-stack Javascript app for studying Swedish vocabulary and grammar.</p>
     </div>
 
     <div ng-controller="UsersController as users">
@@ -26,11 +27,11 @@
       </ul>
     </div>
 
-    <div ng-controller="DogsController as dogs">
-      <input type="text" ng-model="dogs.new">
-      <button ng-click="dogs.add()" id="save">Add Dog</button>
-      <ul id="dogs">
-        <li ng-repeat="dog in dogs.all">{{dog.name}}</li>
+    <div ng-controller="FlashcardsController as flashcards">
+      <input type="text" ng-model="flashcards.new">
+      <button ng-click="flashcards.add()" id="save">Add Flashcard</button>
+      <ul id="flashcards">
+        <li ng-repeat="dog in flashcards.all">{{Flashcard.name}}</li>
       </ul>
     </div>
 
