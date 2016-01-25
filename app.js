@@ -71,6 +71,26 @@ app.get('/', function(req, res){
   )
 });
 
+app.get('/flashcards/:id/edit', function(req, res){
+    db.collection('flashcards').findOne(
+    {_id: ObjectId(req.params.id)},
+    function(err, result){
+      res.render('edit', {flashcard: result});
+    }
+  )
+});
+
+app.patch('/flashcards/:id', function(req, res){
+  // id will be in req.params
+  db.collection('flashcards').update(
+    {_id: ObjectId(req.params.id)},
+    {$set: { name: req.body.flahscard.name }},
+    function(err, result){
+      res.redirect('/');
+    }
+  )
+});
+
 app.post('/flashcards', function(req, res){
   var flashcard = {};
   flashcard.name = req.body.name;
@@ -104,7 +124,6 @@ app.post('/login', function(req, res) {
     res.redirect('/');
   });
 });
-
 
 app.get('/logout', function(req, res) {
   req.session.name = null;

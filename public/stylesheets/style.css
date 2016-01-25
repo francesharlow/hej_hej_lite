@@ -26,8 +26,14 @@ body {
   font-family: 'sweden_sansregular', sans-serif;
   background: #005293;
   color: #FECB00;
+/*  width:100%;*/
 }
+
+/*.wrapper #random-flashcard {
+  margin: 0 auto;
+}*/
 
 .hidden {
   display: none;
+  background-color: transparent;
 }
