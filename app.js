@@ -71,6 +71,17 @@ app.get('/', function(req, res){
   )
 });
 
+app.post('/flashcards', function(req, res){
+  var flashcard = {};
+  flashcard.name = req.body.name;
+  flashcard.english = req.body.english;
+  flashcard.img = req.body.img;
+  db.collection('flashcards').update({name: flashcard.name}, {english: flashcard.english}, {img: flashcard.img}, function(err, data) {
+    console.log(data);
+    res.redirect('/');
+  });
+});
+
 // AJAX
 app.get('/api/flashcards/random', function(req, res) {
 

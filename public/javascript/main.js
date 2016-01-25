@@ -6,13 +6,14 @@ $(document).ready(function() {
 
   // var showFlashcard = function(){
   //   $.ajax({
-  //     url: '/flashcards',
+  //     url: '/api/flashcards/random?limit=1',
   //     type: 'GET',
   //     dataType: 'json',
   //     success: function(data) {
   //       $flashcardUl.empty();
-  //       data.forEach(function(student) {
-  //         $flashcardUl.append(liTemplate(student));
+  //       data.forEach(function(flashcard) {
+  //         console.log(flashcard.name);
+  //         $flashcardUl.append(liTemplate(flashcard));
   //       });
   //     }
   //   })
@@ -21,12 +22,14 @@ $(document).ready(function() {
   var flashcard = $('#random-flashcard'); 
   var startBtn = $('#show-flashcard');
   var btmNav = $('#btm-nav');
-  var score = $('#score');
+  var scoreUl = $('#score');
+  var point = $('#points');
+  var points = 0;
 
   var showFlashcard = function(){
     flashcard.removeClass('hidden');
     btmNav.addClass('hidden');
-    score.removeClass('hidden');
+    scoreUl.removeClass('hidden');
     console.log('show flashcard!');
   };
 
@@ -50,33 +53,15 @@ $(document).ready(function() {
     console.log(guess.val());
     console.log(answer.text());
     if (guess.val() === answer.text()) {
-      console.log('correct');
+      $('#response').text('Correct!').removeClass('hidden');
+      points+=1;
+      point.text('Score: '+ points);
+      // console.log('correct');
+    } else {
+      $('#response').text('Incorrect!').removeClass('hidden');
     }
   }
 
   submitBtn.on('click', checkAnswer);
 
 });
-
-
-
-// $(function() {
-//   var liTemplate = Handlebars.compile($('#li-template').html());
-//   var $flashcardUl = $('#random-flashcards');
-
-//   var populateflashcardUl = function() {
-//     $.ajax({
-//       url: '/api/flashcards/random?limit=1',
-//       method: 'GET',
-//       dataType: 'json',
-//       success: function(data) {
-//         $flashcardUl.empty();
-//         data.forEach(function(student) {
-//           $flashcardUl.append(liTemplate(student));
-//         });
-//       }
-//     })
-//   };
-//   populateflashcardUl();
-//   $('#get-flashcards').on('click', populateflashcardUl);
-// });

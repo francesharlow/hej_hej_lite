@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="/jquery/dist/jquery.js"></script>
   <script src="/angular/angular.js"></script>
+  <script src="/handlebars/handlebars.js"></script>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="/javascript/app.js"></script>
@@ -31,10 +32,19 @@
     <div class="container">
       <h1 style="font-size: 14em">Hej!*</h1>
       <p><a class="btn btn-primary btn-lg" href="#" role="button" id="show-flashcard">Vill du spela?</a></p>
+      <ul id="score">
+        <p style="font-size: 3em" id="points"></p>
+      </ul>
     </div>
   </div>
 
   <!-- flashcard div -->
+
+<!--   <ul id="random-flashcard">
+    <script id="li-template" type="x-template">
+      <li>{{flashcard.name}}</li>
+      </script>
+  </ul> -->
 
     <div class="row hidden" id="random-flashcard">
       <div class="col-sm-6 col-md-4">
@@ -47,27 +57,26 @@
               <a href="#" class="btn btn-primary" role="button" id="submit">Submit</a>
               <a href="#" class="btn btn-primary" role="button" id="show-hint">Hint</a>
               <a href="#" class="btn btn-primary" role="button" id="show-answer">Answer</a>
+              <a href="#" class="btn btn-primary" role="button" id="show-answer">Next</a>
+
               <br>
               <a href="#" class="btn btn-default" role="button" id="edit">Edit</a>
               <a href="#" class="btn btn-default" role="button" id="delete">Delete</a>
               </p>
-              <p class="hidden" id="answer"><%= flashcard.english %>
-              </p>
+              <h3 class="hidden" id="answer"><%= flashcard.english %></h3>
+              <h3 class="hidden" id="response"></h3>
             </div>         
           </div>
         </div>
       </div>
 
-  <nav class="navbar navbar-default navbar-fixed-bottom" style="background: #005293; border: none">
+<!--   <nav class="navbar navbar-default navbar-fixed-bottom" style="background: #005293; border: none">
     <div class="container">
       <ul class="nav navbar-nav navbar-left" id="btm-nav">
         <p style="font-size: 1em">*Hej Hej Lite is a fun, simple full-stack Javascript app for studying Swedish vocabulary and grammar.</p>
       </ul>
-      <ul class="nav navbar-nav navbar-right hidden" id="score">
-        <p>POINTS</p>
-      </ul>
     </div>
-  </nav>
+  </nav> -->
 
 <!--     <div ng-controller="UsersController as users">
       <input type="text" ng-model="users.new">
