@@ -108,6 +108,7 @@ app.get('/api/flashcards/random', function(req, res) {
   var limit = parseInt(req.query.limit) || 1; 
 
   db.collection('flashcards').aggregate([{$sample: { size: limit }}]).toArray(function(err, data) {
+    console.log(err)
     var randomFlashcard = data;
     res.json(randomFlashcard);
   })

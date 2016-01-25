@@ -1,9 +1,8 @@
 console.log('main.js is linked!');
 
 $(document).ready(function() {
-  // var template = Handlebars.compile($('#li-template').html());
-  // var $flashcardUl = $('#random-flashcard');
-
+  var template = Handlebars.compile($('#li-template').html());
+  var $flashcardUl = $('#random-flashcard');
   var flashcard = $('#random-flashcard'); 
   var startBtn = $('#show-flashcard');
   var btmNav = $('#btm-nav');
@@ -11,18 +10,14 @@ $(document).ready(function() {
   var point = $('#points');
   var points = 0;
   var nextBtn = $('#next');
-  var hintBtn = $('#show-hint');
-  var submitBtn = $('#submit');
-  var guess = $('#guess');
-  var answerBtn = $('#show-answer');
-  var answer = $('#answer');
 
-  var nextFlashcard = function(){
+  nextFlashcard = function(){
     $.ajax({
       url: '/api/flashcards/random?limit=1',
       type: 'GET',
       dataType: 'json',
       success: function(data) {
+        console.log(data)
         $flashcardUl.empty();
         data.forEach(function(flashcard) {
           console.log(flashcard);
@@ -32,7 +27,6 @@ $(document).ready(function() {
     })
   };
 
-  nextBtn.on('click', nextFlashcard);
 
   var showFlashcard = function(){
     flashcard.removeClass('hidden');
@@ -44,6 +38,8 @@ $(document).ready(function() {
   };
 
   startBtn.on('click', showFlashcard);
+
+  var hintBtn = $('#show-hint');
   
   var showImg = function(){
     $('img').removeClass('hidden');
@@ -51,6 +47,11 @@ $(document).ready(function() {
   };
 
   hintBtn.on('click', showImg);
+
+  var submitBtn = $('#submit');
+  var guess = $('#guess');
+  var answerBtn = $('#show-answer');
+  var answer = $('#answer');
 
   var checkAnswer = function(){
     console.log(guess.val());
