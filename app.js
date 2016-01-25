@@ -38,24 +38,6 @@ MongoClient.connect(mongoUrl, function(err, database) {
 });
 
 // Routes
-app.get('/seeds', function(req, res){
-  db.collection('flashcards').remove({});
-  db.collection('flashcards').insertMany([
-    {"name": "hund",
-      "english": "dog",
-      "img": "https://upload.wikimedia.org/wikipedia/commons/0/03/V%C3%A4stg%C3%B6taspets_hane_5_%C3%A5r.jpg"
-    },
-    {
-      "name": "bil",
-      "english": "car",
-      "img": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Volvo144dl.JPG"
-    },
-    {
-      "name": "fisk",
-      "english": "fish",
-      "img": "https://upload.wikimedia.org/wikipedia/commons/4/40/Swedish_fish.png"
-    }
-})
 
 app.get('/', function(req, res){
   db.collection('flashcards').remove({});
@@ -86,6 +68,10 @@ app.get('/', function(req, res){
 app.get('/flashcards', function(req, res){
   res.json({});
 });
+
+app.get('flashcards/new', function(req, res){
+  res.render('new');
+})
 
 app.post('/flashcards', function(req, res){
   var flashcard = {};
