@@ -26,14 +26,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/bower_components'));
 app.set('view engine', 'ejs');
-// app.use(methodOverride('_method'));
 
-// app.use(session({
-//   secret: 'waffles',
-//   store: new MongoStore({ url: mongoUrl })
-// }))
-
-// db
 var db;
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
@@ -71,6 +64,21 @@ app.get('/', function(req, res){
   )
 });
 
+app.get('/flashcards', function(req, res){
+  res.json({});
+});
+
+app.post('/flashcards', function(req, res){
+  var flashcard = {};
+  flashcard.name = req.body.name;
+  flashcard.english = req.body.english;
+  flashcard.img = req.body.img;
+  db.collection('flashcards').update({name: flashcard.name}, {english: flashcard.english}, {img: flashcard.img}, function(err, data) {
+    console.log(data);
+    res.redirect('/');
+  });
+});
+
 app.get('/flashcards/:id/edit', function(req, res){
     db.collection('flashcards').findOne(
     {_id: ObjectId(req.params.id)},
@@ -91,31 +99,13 @@ app.patch('/flashcards/:id', function(req, res){
   )
 });
 
-app.get('/users', function(res, req){
-  // data you want to send back as json
-})
-
-app.get('/flashcards', function(res, req){
-  // data you want to send back as json
-})
-
-app.post('/flashcards', function(req, res){
-  var flashcard = {};
-  flashcard.name = req.body.name;
-  flashcard.english = req.body.english;
-  flashcard.img = req.body.img;
-  db.collection('flashcards').update({name: flashcard.name}, {english: flashcard.english}, {img: flashcard.img}, function(err, data) {
-    console.log(data);
-    res.redirect('/');
-  });
-});
-
 // AJAX
 app.get('/api/flashcards/random', function(req, res) {
 
   var limit = parseInt(req.query.limit) || 1; 
 
   db.collection('flashcards').aggregate([{$sample: { size: limit }}]).toArray(function(err, data) {
+    console.log(err)
     var randomFlashcard = data;
     res.json(randomFlashcard);
   })

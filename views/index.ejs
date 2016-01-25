@@ -21,8 +21,6 @@
   <nav class="navbar navbar-default navbar-fixed-top" style="background: #005293; border: none">
     <div class="container">
       <ul class="nav navbar-nav navbar-right">
-       <!--  <button type="button" class="btn btn-default navbar-btn">Sign up</button> -->
-<!--         <button type="button" class="btn btn-default navbar-btn">Log in</button> -->
       </ul>
     </div>
   </nav>
@@ -40,32 +38,7 @@
 
   <!-- flashcard div -->
 
-  <!-- <div class="row hidden">
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="{{ flashcard.img }}" alt="..." id="img" class="hidden">
-            <div class="caption" id="random-flashcard">
-              <script id="template" type="x-template">
-                <h3> {{flashcard.name}} </h3>
-                <p>
-                <input type="text" id="guess"></input>
-                <a href="#" class="btn btn-primary" role="button" id="submit">Submit</a>
-                <a href="#" class="btn btn-primary" role="button" id="show-hint">Hint</a>
-                <a href="#" class="btn btn-primary" role="button" id="show-answer">Answer</a>
-                <a href="#" class="btn btn-primary" role="button" id="next">Next</a>
-                <br>
-                <a href="#" class="btn btn-default" role="button" id="edit">Edit</a>
-                <a href="#" class="btn btn-default" role="button" id="delete">Delete</a>
-                </p>
-                <h3 class="hidden" id="answer"> {{flashcard.english}} </h3>
-                <h3 class="hidden" id="response"></h3>
-              </script>
-            </div>         
-          </div>
-        </div>
-      </div>
- -->
-    <div class="row hidden" id="random-flashcard" ng-controller="FlashcardController as flashcard">
+    <div class="row hidden" id="flashcard-container" ng-controller="FlashcardsController as flashcard">
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img src="<%= flashcard.img %>" alt="..." id="img" class="hidden">
@@ -76,7 +49,7 @@
               <a href="#" class="btn btn-primary" role="button" id="submit">Submit</a>
               <a href="#" class="btn btn-primary" role="button" id="show-hint">Hint</a>
               <a href="#" class="btn btn-primary" role="button" id="show-answer">Answer</a>
-              <a href="#" class="btn btn-primary" role="button" id="show-answer">Next</a>
+              <a href="#" class="btn btn-primary" role="button" id="next">Next</a>
 
               <br>
               <a href="#" class="btn btn-default" role="button" id="edit">Edit</a>
@@ -94,23 +67,38 @@
         </div>
       </div>
 
-<!--   <nav class="navbar navbar-default navbar-fixed-bottom" style="background: #005293; border: none">
-    <div class="container">
-      <ul class="nav navbar-nav navbar-left" id="btm-nav">
-        <p style="font-size: 1em">*Hej Hej Lite is a fun, simple full-stack Javascript app for studying Swedish vocabulary and grammar.</p>
-      </ul>
-    </div>
-  </nav> -->
-
-<!--     <div ng-controller="UsersController as users">
-      <input type="text" ng-model="users.new">
-      <button ng-click="users.add()" id="save">Sign Up</button>
-      <ul id="users">
-        <li ng-repeat="user in users.all">{{User.name}}</li>
-      </ul>
-    </div> -->
-
   </div>
+  
+  <script type="x-template" id="template">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="{{flashcard.img}}" alt="..." id="img" class="hidden">
+          <div class="caption">
+            <h3>{{flashcard.name}}</h3>
+            <p>
+            <input type="text" id="guess"></input>
+            <a href="#" class="btn btn-primary" role="button" id="submit">Submit</a>
+            <a href="#" class="btn btn-primary" role="button" id="show-hint">Hint</a>
+            <a href="#" class="btn btn-primary" role="button" id="show-answer">Answer</a>
+            <a href="#" class="btn btn-primary" role="button" id="next">Next</a>
+
+            <br>
+            <a href="#" class="btn btn-default" role="button" id="edit">Edit</a>
+            <a href="#" class="btn btn-default" role="button" id="delete">Delete</a>
+            </p>
+            <h3 class="hidden" id="answer">{{ flashcard.english }}</h3>
+            <h3 class="hidden" id="response"></h3>
+          </div>
+          <div class="caption hidden">
+            <input type="text" ng-model="flashcard.name">
+            <input type="text" ng-model="flashcard.english">
+            <input type="text" ng-model="flashcard.img">
+          </div>        
+        </div>
+      </div>
+    </div>
+  </script>
+
   <script src="/javascript/main.js"></script>
 </body>
 </html>
