@@ -99,8 +99,6 @@ app.patch('/flashcards/:id', function(req, res){
   )
 });
 
-
-
 // AJAX
 app.get('/api/flashcards/random', function(req, res) {
 
