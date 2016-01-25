@@ -1,31 +1,42 @@
-angular.module('HejHejLiteApp').controller('FlashcardsController', FlashcardsController)
+// angular.module('HejHejLiteApp').controller('FlashcardsController', FlashcardsController)
 
-FlashcardsController.$inject = ['$http'];
+// FlashcardsController.$inject = ['$http'];
 
-function FlashcardsController($http){
-    var flashcards = this;
+// function FlashcardsController($http){
+//     var flashcards = this;
 
-    flashcards.all = [];
+//     flashcards.all = [];
+//     // console.log(flashcards.all);
 
-    flashcards.add = function(){
-      console.log('clicked', flashcards.new);
-      var flashcard = {name: flashcards.new};
-      $http
-        .post('/flashcards', flashcard)
-        .then(function(response){
-          console.log(response.data);
-          dogs.all.push(flashcard);
-        })
-      flashcards.new = "";
-    }
+//     flashcards.show = function(){
+//       console.log('clicked', flashcards.all);
+//       var flashcard = flashcards[Math.floor(Math.random()*flashcards.length)];
+//       $http
+//         .get('/flashcards', flashcard)
+//         .then(function(response){
+//           // console.log(response.data);
+//         });
+//     };
 
-    flashcards.fetch = function(){
-      $http
-        .get('/flashcards')
-        .then(function(response){
-          flashcards.all = response.data;
-      })
-    }
+//     flashcards.add = function(){
+//       console.log('clicked', flashcards.new);
+//       var flashcard = {name: flashcards.new};
+//       $http
+//         .post('/flashcards', flashcard)
+//         .then(function(response){
+//           console.log(response.data);
+//           flashcards.all.push(flashcard);
+//         })
+//       flashcards.new = "";
+//     }
 
-    flashcards.fetch();
-}
+//     flashcards.fetch = function(){
+//       $http
+//         .get('/flashcards')
+//         .then(function(response){
+//           flashcards.all = response.data;
+//       })
+//     }
+
+//     flashcards.fetch();
+// }

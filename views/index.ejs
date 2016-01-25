@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="/jquery/dist/jquery.js"></script>
   <script src="/angular/angular.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="/javascript/app.js"></script>
   <script src="/javascript/users_controller.js"></script>
   <script src="/javascript/flashcards_controller.js"></script>
@@ -13,28 +15,62 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="splash">
-      <h1>Hej!*</h1>
-      <h2>Vill du spela?</h2>
-      <p>*Hej Hej Lite is a fun, simple full-stack Javascript app for studying Swedish vocabulary and grammar.</p>
-    </div>
 
-    <div ng-controller="UsersController as users">
+  <!-- nav bar -->
+  <nav class="navbar navbar-default navbar-fixed-top" style="background: #005293">
+    <div class="container">
+      <ul class="nav navbar-nav navbar-right">
+        <button type="button" class="btn btn-default navbar-btn">Sign up</button>
+        <button type="button" class="btn btn-default navbar-btn">Log in</button>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- welcome div -->  
+  <div class="jumbotron">
+    <div class="container">
+      <h1 style="font-size: 14em">Hej!*</h1>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button" id="show-flashcards">Vill du spela?</a></p>
+    </div>
+  </div>
+
+  <!-- flashcard div -->
+  <% flashcards.forEach(function(flashcard){ %> 
+    <div class="row hidden" id="random-flashcard">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <img src="<%= flashcard.img %>" alt="..." class="hidden">
+            <div class="caption">
+              <h3><%= flashcard.name %></h3>
+              <p>
+              <input></input>
+              <a href="#" class="btn btn-primary" role="button" id="hint">Hint</a>
+              <a href="#" class="btn btn-default" role="button" id="edit">Edit</a>
+              <a href="#" class="btn btn-default" role="button" id="delete">Delete</a>
+              </p>
+            </div>         
+          </div>
+        </div>
+      </div>
+  <% }) %>
+
+  <nav class="navbar navbar-default navbar-fixed-bottom" style="background: #005293; border: none">
+    <div class="container">
+      <ul class="nav navbar-nav navbar-left">
+        <p style="font-size: 1em">*Hej Hej Lite is a fun, simple full-stack Javascript app for studying Swedish vocabulary and grammar.</p>
+      </ul>
+    </div>
+  </nav>
+
+<!--     <div ng-controller="UsersController as users">
       <input type="text" ng-model="users.new">
       <button ng-click="users.add()" id="save">Sign Up</button>
       <ul id="users">
         <li ng-repeat="user in users.all">{{User.name}}</li>
       </ul>
-    </div>
+    </div> -->
 
-    <div ng-controller="FlashcardsController as flashcards">
-      <input type="text" ng-model="flashcards.new">
-      <button ng-click="flashcards.add()" id="save">Add Flashcard</button>
-      <ul id="flashcards">
-        <li ng-repeat="dog in flashcards.all">{{Flashcard.name}}</li>
-      </ul>
-    </div>
-
-  </div>  
+  </div>
+  <script src="/javascript/main.js"></script>
 </body>
 </html>
