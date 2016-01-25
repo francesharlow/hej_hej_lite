@@ -6,6 +6,22 @@ function FlashcardsController($http){
     var flashcards = this;
 
     flashcards.all = [];
+    // console.log(flashcards.all);
+
+    flashcards.show = function(){
+      console.log('clicked', flashcards.all);
+      var flashcard = flashcards[Math.floor(Math.random()*flashcards.length)];
+      $http
+        .get('/flashcards', flashcard)
+        .then(function(response){
+          // console.log(response.data);
+        });
+    };
+
+    flashcards.edit = function(){
+      console.log('clicked', flashcards.name);
+      var flashcard = {name: flashcards.name}
+    }
 
     flashcards.add = function(){
       console.log('clicked', flashcards.new);
@@ -14,7 +30,7 @@ function FlashcardsController($http){
         .post('/flashcards', flashcard)
         .then(function(response){
           console.log(response.data);
-          dogs.all.push(flashcard);
+          flashcards.all.push(flashcard);
         })
       flashcards.new = "";
     }
