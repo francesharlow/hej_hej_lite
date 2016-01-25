@@ -91,6 +91,14 @@ app.patch('/flashcards/:id', function(req, res){
   )
 });
 
+app.get('/users', function(res, req){
+  // data you want to send back as json
+})
+
+app.get('/flashcards', function(res, req){
+  // data you want to send back as json
+})
+
 app.post('/flashcards', function(req, res){
   var flashcard = {};
   flashcard.name = req.body.name;
