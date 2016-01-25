@@ -7,6 +7,19 @@ var bcrypt = require('bcrypt');
 var methodOverride = ('method-override');
 var MongoStore = require('connect-mongo')(session);
 
+var authenticateUser = function(name, password, callback) {
+  db.collection('users').findOne({username: username}, function(err, data) {
+    if (err) {throw err;}
+    bcrypt.compare(password, data.password_digest, function(err, passwordsMatch) {
+      if (passwordsMatch) {
+        callback(data);
+      } else {
+        callback(false);
+      }
+    })
+  });
+};
+
 // Configuration
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -14,6 +27,11 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/bower_components'));
 app.set('view engine', 'ejs');
 // app.use(methodOverride('_method'));
+
+// app.use(session({
+//   secret: 'waffles',
+//   store: new MongoStore({ url: mongoUrl })
+// }))
 
 // db
 var db;
@@ -47,7 +65,8 @@ app.get('/', function(req, res){
   ]).then(
     db.collection('flashcards').find({}).toArray(function(err, results){
     // console.log(results);
-    res.render('index', {flashcards: results});
+    var randomFlashcard = results[Math.floor(Math.random()*results.length)];
+    res.render('index', {flashcard: randomFlashcard});
     })
   )
 });
@@ -64,12 +83,22 @@ app.get('/api/flashcards/random', function(req, res) {
 });
 
 // User Authentication
-// app.post('/login', function(req, res) {
-//   res.redirect('/');
-// });
+app.post('/login', function(req, res) {
+  // req.session.name = req.body.username;
+  authenticateUser(req.body.username, req.body.password, function(user) {
+    if (user) {
+      req.session.name = user.name;
+      req.session.userId = user._id;
+    }
+    res.redirect('/');
+  });
+});
 
-// app.get('/logout', function(req, res) {
-//   res.redirect('/');
-// })
+
+app.get('/logout', function(req, res) {
+  req.session.name = null;
+  req.session.userId = null;
+  res.redirect('/');
+})
 
 app.listen(process.env.PORT || 4000);
