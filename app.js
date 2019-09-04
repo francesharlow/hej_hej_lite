@@ -38,6 +38,7 @@ MongoClient.connect(mongoUrl, function(err, database) {
 });
 
 // Routes
+
 app.get('/', function(req, res){
   db.collection('flashcards').remove({});
   db.collection('flashcards').insertMany([
@@ -67,6 +68,10 @@ app.get('/', function(req, res){
 app.get('/flashcards', function(req, res){
   res.json({});
 });
+
+app.get('flashcards/new', function(req, res){
+  res.render('new');
+})
 
 app.post('/flashcards', function(req, res){
   var flashcard = {};
