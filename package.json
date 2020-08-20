@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/francesharlow/hej_hej_lite#readme",
   "dependencies": {
-    "bcrypt": "^0.8.5",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.14.2",
     "bower": "^1.7.2",
     "connect-mongo": "^1.1.0",
